@@ -11,8 +11,27 @@ const getWorkoutById = async (req, res) => {
 };
 
 const createWorkout = async (req, res) => {
-    const workout = await workoutService.createWorkout();
-    res.send("Create new workout");
+    const { body } = req;
+    if (
+        !body.name ||
+        !body.mode ||
+        !body.equipment ||
+        !body.exercises ||
+        !body.trainerTips
+    ) {
+        return;
+    }
+
+    const newWorkout = {
+        name: body.name,
+        mode: body.mode,
+        equipment: body.equipment,
+        exercises: body.exercises,
+        trainerTips: body.trainerTips,
+
+    };
+    const workout = await workoutService.createWorkout(newWorkout);
+    res.status(201).send({status: "OK", data: newWorkout});
 };
 
 const updateWorkout = async (req, res) => {
