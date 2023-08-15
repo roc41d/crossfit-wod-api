@@ -6,6 +6,14 @@ const getAllWorkouts = async () => {
     return DB.workouts;
 };
 
+const getWorkoutById = async (workoutId) => {
+    const workout = DB.workouts.find((workout) => workout.id === workoutId);
+    if (!workout) {
+        return;
+    }
+    return workout;
+};
+
 const createWorkout = async (newWorkout) => {
     const isWorkoutExist =  DB.workouts.findIndex((workout) => workout.name === newWorkout.name) > -1;
     if (isWorkoutExist) {
@@ -19,5 +27,6 @@ const createWorkout = async (newWorkout) => {
 
 module.exports = {
     getAllWorkouts,
+    getWorkoutById,
     createWorkout
 };

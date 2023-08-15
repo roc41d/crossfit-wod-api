@@ -6,8 +6,12 @@ const getAllWorkouts = async (req, res) => {
 };
 
 const getWorkoutById = async (req, res) => {
-    const workout = await workoutService.getWorkoutById();
-    res.send(`Get workout with id ${req.params.workoutId}`);
+    const { 
+        params: { workoutId },
+    } = req;
+
+    const workout = await workoutService.getWorkoutById(workoutId);
+    res.send({status: "OK", data: workout});
 };
 
 const createWorkout = async (req, res) => {

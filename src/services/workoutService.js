@@ -6,8 +6,9 @@ const getAllWorkouts = async () => {
     return workouts;
 };
 
-const getWorkoutById = async () => {
-    return;
+const getWorkoutById = async (workoutId) => {
+    const workout = await Workout.getWorkoutById(workoutId);
+    return workout;
 };
 
 const createWorkout = async (newWorkout) => {
