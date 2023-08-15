@@ -2,7 +2,7 @@ const workoutService = require("../services/workoutService");
 
 const getAllWorkouts = async (req, res) => {
     const workouts = await workoutService.getAllWorkouts();
-    res.send("Get all workouts");
+    res.send({status: "success", data: workouts});
 };
 
 const getWorkoutById = async (req, res) => {

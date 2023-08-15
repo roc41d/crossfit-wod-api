@@ -1,5 +1,8 @@
+const Workout = require("../database/Workout");
+
 const getAllWorkouts = async () => {
-    return;
+    const workouts = await Workout.getAllWorkouts();
+    return workouts;
 };
 
 const getWorkoutById = async () => {
