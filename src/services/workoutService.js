@@ -19,8 +19,13 @@ const createWorkout = async (newWorkout) => {
         updatedAt: new Date().toLocaleString("en-US", { timeZone: "CET" }),
     };
 
-    const createdWorkout = await Workout.createWorkout(workoutToInsert);
-    return createdWorkout;
+    try {
+        const createdWorkout = await Workout.createWorkout(workoutToInsert);
+        return createdWorkout;
+
+    } catch (error) {
+        throw error;
+    }
 };
 
 const updateWorkout = async (workoutId, workoutToUpdate) => {

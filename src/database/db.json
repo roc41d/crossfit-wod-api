@@ -83,6 +83,28 @@
       "id": "b9219d6e-3c8e-4f5e-a8ba-d9c2dbc5596e",
       "createdAt": "8/15/2023, 8:45:06 PM",
       "updatedAt": "8/15/2023, 8:45:06 PM"
+    },
+    {
+      "name": "New Test workout",
+      "mode": "AMRAP 20",
+      "equipment": [
+        "rack",
+        "barbell",
+        "abmat"
+      ],
+      "exercises": [
+        "15 toes to bars",
+        "10 thrusters",
+        "30 abmat sit-ups"
+      ],
+      "trainerTips": [
+        "Split your toes to bars into two sets maximum",
+        "Go unbroken on the thrusters",
+        "Take the abmat sit-ups as a chance to normalize your breath"
+      ],
+      "id": "9d083ecf-dc32-4d70-b00e-110dbefc5369",
+      "createdAt": "8/15/2023, 11:53:28 PM",
+      "updatedAt": "8/15/2023, 11:53:28 PM"
     }
   ]
 }
