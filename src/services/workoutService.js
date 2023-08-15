@@ -23,12 +23,13 @@ const createWorkout = async (newWorkout) => {
     return createdWorkout;
 };
 
-const updateWorkout = async () => {
-    return;
+const updateWorkout = async (workoutId, workoutToUpdate) => {
+    const updatedWorkout = await Workout.updateWorkout(workoutId, workoutToUpdate);
+    return updatedWorkout;
 };
 
-const deleteWorkout = async () => {
-    return;
+const deleteWorkout = async (workoutId) => {
+    await Workout.deleteWorkout(workoutId);
 };
 
 module.exports = {

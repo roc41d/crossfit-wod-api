@@ -39,13 +39,30 @@ const createWorkout = async (req, res) => {
 };
 
 const updateWorkout = async (req, res) => {
-    const workout = await workoutService.updateWorkout();
-    res.send(`Update workout with id ${req.params.workoutId}`);
+    const { 
+        body,
+        params: { workoutId },
+    } = req;
+
+    if (!workoutId) {
+        return;
+    }
+
+    const workout = await workoutService.updateWorkout(workoutId, body);
+    res.send({status: "OK", data: workout});
 };
 
 const deleteWorkout = async (req, res) => {
-    const workout = await workoutService.deleteWorkout();
-    res.send(`Delete workout with id ${req.params.workoutId}`);
+    const {
+        params: { workoutId },
+    } = req;
+
+    if (!workoutId) {
+        return;
+    }
+
+    await workoutService.deleteWorkout(workoutId);
+    res.status(204).send({status: "OK"});
 };
 
 module.exports = {
