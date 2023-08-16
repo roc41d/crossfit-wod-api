@@ -2,9 +2,15 @@ const DB = require('./db.json');
 
 const { saveToDatabase } = require("./utils");
 
-const getAllWorkouts = async () => {
+const getAllWorkouts = async (filterParams) => {
     try {
-        return DB.workouts;
+        let workouts = DB.workouts;
+        if (filterParams.mode) {
+            return DB.workouts.filter((workout) =>
+                workout.mode.toLocaleLowerCase().includes(filterParams.mode)
+            );
+        }
+        return workouts;
     } catch (error) {
         throw {
             status: error?.status || 500,

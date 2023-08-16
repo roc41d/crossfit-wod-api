@@ -1,9 +1,9 @@
 const { v4: uuid } = require("uuid")
 const Workout = require("../database/Workout");
 
-const getAllWorkouts = async () => {
+const getAllWorkouts = async (filterParams) => {
     try {
-        const workouts = await Workout.getAllWorkouts();
+        const workouts = await Workout.getAllWorkouts(filterParams);
         return workouts;
     } catch (error) {
         throw error;
