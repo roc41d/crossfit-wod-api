@@ -1,9 +1,9 @@
 const workoutService = require("../services/workoutService");
 
 const getAllWorkouts = async (req, res) => {
-    const { mode } = req.query;
+    const { mode, equipment } = req.query;
     try {
-        const workouts = await workoutService.getAllWorkouts({ mode });
+        const workouts = await workoutService.getAllWorkouts({ mode, equipment });
         res.send({status: "success", data: workouts});
     } catch (error) {
         res

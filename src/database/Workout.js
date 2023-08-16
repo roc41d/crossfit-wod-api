@@ -6,9 +6,17 @@ const getAllWorkouts = async (filterParams) => {
     try {
         let workouts = DB.workouts;
         if (filterParams.mode) {
-            return DB.workouts.filter((workout) =>
-                workout.mode.toLocaleLowerCase().includes(filterParams.mode)
+            workouts = DB.workouts.filter((workout) =>
+                workout.mode.toLocaleLowerCase().includes(filterParams.mode.toLocaleLowerCase())
             );
+        }
+
+        if (filterParams.equipment) {
+            workouts = DB.workouts.filter((workout) => {
+                return workout.equipment.some((item) =>
+                    item.toLocaleLowerCase() === filterParams.equipment.toLocaleLowerCase()
+                )
+            });
         }
         return workouts;
     } catch (error) {
