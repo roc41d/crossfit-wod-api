@@ -1,8 +1,14 @@
 const workoutService = require("../services/workoutService");
 
 const getAllWorkouts = async (req, res) => {
-    const workouts = await workoutService.getAllWorkouts();
-    res.send({status: "success", data: workouts});
+    try {
+        const workouts = await workoutService.getAllWorkouts();
+        res.send({status: "success", data: workouts});
+    } catch (error) {
+        res
+        .status(error?.status || 500)
+        .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
 };
 
 const getWorkoutById = async (req, res) => {
@@ -10,8 +16,24 @@ const getWorkoutById = async (req, res) => {
         params: { workoutId },
     } = req;
 
-    const workout = await workoutService.getWorkoutById(workoutId);
-    res.send({status: "OK", data: workout});
+    if (!workoutId) {
+        res
+        .status(400)
+        .send({
+            status: "FAILED",
+            data: {
+                error: "':workoutId' is missing in request params"},
+        });
+    }
+
+    try {
+        const workout = await workoutService.getWorkoutById(workoutId);
+        res.send({status: "OK", data: workout});
+    } catch (error) {
+        res
+        .status(error?.status || 500)
+        .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
 };
 
 const createWorkout = async (req, res) => {
@@ -61,11 +83,26 @@ const updateWorkout = async (req, res) => {
     } = req;
 
     if (!workoutId) {
-        return;
+        res
+        .status(400)
+        .send({
+            status: "FAILED",
+            data: {
+                error: "':workoutId' is missing in request params"},
+        });
     }
 
-    const workout = await workoutService.updateWorkout(workoutId, body);
-    res.send({status: "OK", data: workout});
+    try {
+        const workout = await workoutService.updateWorkout(workoutId, body);
+        res.send({status: "OK", data: workout});
+    } catch (error) {
+        res
+        .status(error?.status || 500)
+        .send({ 
+            status: "FAILED", 
+            data: { error: error?.message || error } 
+        });
+    }
 };
 
 const deleteWorkout = async (req, res) => {
@@ -74,11 +111,23 @@ const deleteWorkout = async (req, res) => {
     } = req;
 
     if (!workoutId) {
-        return;
+        res
+        .status(400)
+        .send({
+            status: "FAILED",
+            data: {
+                error: "':workoutId' is missing in request params"},
+        });
     }
 
-    await workoutService.deleteWorkout(workoutId);
-    res.status(204).send({status: "OK"});
+    try {
+        await workoutService.deleteWorkout(workoutId);
+        res.status(204).send({status: "OK"});
+    } catch (error) {
+        res
+        .status(error?.status || 500)
+        .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
 };
 
 module.exports = {
